@@ -7,10 +7,10 @@ This script places polyspheres at the positions of placeholder groups. The spher
 
 ## Usage
 
-'''python
+```python
 sphere-on-placeholders
     -p <path> #the maya scene to place spheres in
     -n <name> #the name of the transforms to place spheres on
 
 mayapy assignment3.py --path 'example-path.mb' --name 'door'
-'''
+```
