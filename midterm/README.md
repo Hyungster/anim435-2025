@@ -17,3 +17,13 @@ Select a preset from the dropdown. Press 'Create Cam' button.
 A preset .csv file should be formatted as following:
 
 camera,horizontal aperture (mm),vertical aperture (mm),focal length (mm)
+
+For example:
+
+```
+ARRI Alexa 65,54.12,25.58,50.0
+Blackmagic Ursa 4k,21.12,11.88,32.0
+RED Weapon Dragon 6k,30.70,15.80,35.0
+Sony Venice,36.0,19.4,70.0
+James Webb Space Telescope,6500.0,6500.0,131400.0
+```

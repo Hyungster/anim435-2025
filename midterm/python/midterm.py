@@ -14,7 +14,7 @@ def get_preset_path():
     cmds.text(text_csv_path, edit=True, label=path)
     return path
 
-#Reads the .csv file from the given path. Parses the results into a (string, float[]) dictionary.
+#Reads the .csv file from the given path. Parses the results into camera_presets.
 #Params:
 #   filepath: string path to the .csv file 
 def parse_preset_csv(filepath):
@@ -37,7 +37,7 @@ def parse_preset_csv(filepath):
     
     csvfile.close()
 
-#Receives an array of strings and tries to append them to camera_presets as (string, float[]) pair.
+#Receives an array of strings and tries to append them to camera_presets.
 #Params:
 #   row: string[4] read from a single row in the .csv file in parse_preset_csv
 def parse_preset_row(row):
@@ -86,14 +86,17 @@ def create_cam(*args):
     print("Camera nane: " + cam_name)
     values = camera_presets[cam_name]
     print(values)
+
+
     
     cam = cmds.camera(name=cam_name)
-    cmds.setAttr(f'{cam[1]}.horizontalFilmAperture', milimeters_to_inches(values[0]))
-    cmds.setAttr(f'{cam[1]}.verticalFilmAperture', milimeters_to_inches(values[1]))
-    cmds.setAttr(f'{cam[1]}.focalLength', milimeters_to_inches(values[2]))
+    cmds.setAttr(f'{cam[1]}.horizontalFilmAperture', convert_from_mm(values[0]))
+    cmds.setAttr(f'{cam[1]}.verticalFilmAperture', convert_from_mm(values[1]))
+    cmds.setAttr(f'{cam[1]}.focalLength', convert_from_mm(values[2]))
 
-def milimeters_to_inches(value):
-    return value * 0.0393701
+def convert_from_mm(value):
+    #current_unit = cmds.currentUnit(query=True, linear=True)
+    return float(cmds.convertUnit(value, toUnit="inch", fromUnit="mm").replace("in", ""))
 
 # Easy Camera Preset UI layout
 # ----------------------------
