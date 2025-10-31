@@ -7,9 +7,10 @@ camera_presets = {}
 
 #Pops up a file dialog to get a .csv file.
 #Returns: 
-#   a string path of the selected .csv file
+#   string: path of the selected .csv file
 def get_preset_path():
     path = cmds.fileDialog2(fileFilter="*.csv", dialogStyle=2, fileMode=1, okCaption="Accept")
+    if (not path): path = ""
     path = "".join(path)
     cmds.text(text_csv_path, edit=True, label=path)
     return path
@@ -87,22 +88,27 @@ def create_cam(*args):
     values = camera_presets[cam_name]
     print(values)
 
-
-    
     cam = cmds.camera(name=cam_name)
     cmds.setAttr(f'{cam[1]}.horizontalFilmAperture', convert_from_mm(values[0]))
     cmds.setAttr(f'{cam[1]}.verticalFilmAperture', convert_from_mm(values[1]))
     cmds.setAttr(f'{cam[1]}.focalLength', convert_from_mm(values[2]))
 
+#Converts a value from mm to inches. Camera attributes always seems to use inches even though my working units are in cm.
+#Params:
+#   value: value to convert from (mm)
+#Returns:
+#   float: the conversion result in inches
 def convert_from_mm(value):
-    #current_unit = cmds.currentUnit(query=True, linear=True)
     return float(cmds.convertUnit(value, toUnit="inch", fromUnit="mm").replace("in", ""))
+
+
+# Main
 
 # Easy Camera Preset UI layout
 # ----------------------------
 # 1 [Path:] [selected path] [file dialogue button]
 # 2 [path valid feedback text]
-# 3 [Preset:] [Dropdown for options] [create camera button]
+# 3 [Dropdown for options] [create camera button]
 
 win = cmds.window("Easy Camera Preset", height=100, width=500)
 
