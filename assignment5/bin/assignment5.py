@@ -1,18 +1,15 @@
 import os
-import maya.utils as utils
 import maya.cmds as cmds
 import maya.standalone
 
+#Import and format logger
 import logging
 logger = logging.getLogger(__name__)
 
-FORMAT = "[%(asctime)s][%(filename)s][%(lineno)d][%(levelname)s] %(msg)s"
+FORMAT = "[%(asctime)s][%(levelname)s] %(msg)s"
 logging.basicConfig(filename='log.txt',
                     level=logging.INFO, 
                     format=FORMAT)
-
- 
-
 
 #Checks if the given path is a maya binary scene file.
 #Params:
@@ -38,6 +35,7 @@ asset_type = os.getenv("ASSETTYPE")
 
 should_quit = False
 
+#throw error and quit when environment variables are not set.
 if (not root_folder):
     logger.error("The environment variable ROOT is void. Please set it in shell. Terminating.")
     should_quit = True
@@ -55,19 +53,18 @@ asset_type = asset_type.lower()
 
 
 #put together the paths
-#full_path = rf"{root_folder}\{asset_name}\{asset_type}.mb"
 full_path = os.path.join(root_folder, asset_name, asset_type + ".mb")
 asset_path = os.path.join(root_folder, asset_name)
 
 #make the folder if it doesn't exist
 os.makedirs(asset_path, exist_ok=True)
 
-#make and open or just open the file
+#make and open or just open the file if exists already
 if (isMayaBinaryScene(full_path)):
-    logger.info("Maya file already exists. Opening in Maya.")
+    logger.info(f"Maya file already exists. Opening {full_path} in Maya.")
     os.system(rf"maya -file {full_path}")
 else:
-    logger.info("Maya file not found. Creating a new scene.")
+    logger.info(f"Maya file not found. Creating a new scene in {full_path}.")
     cmds.file(new=True)
     cmds.file(rename=full_path)
     cmds.file(save=True)

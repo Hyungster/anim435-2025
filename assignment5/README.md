@@ -2,7 +2,7 @@
 
 ## Overview
 
-This script creates and opens a new Maya scene in a subfolder of \assetname\assettype. If the file already exists, opens the file instead.
+This script creates and opens a new Maya scene in a subfolder of \assetname\assettype. If the file already exists, opens the file instead. Check the log.txt in /assignment5/bin for logs.
 
 ## Usage
 

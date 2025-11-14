@@ -1,1 +1,4 @@
 
+[2025-11-14 12:06:05,112][INFO] Maya file already exists. Opening C:\Users\hyung\Desktop\Temp\pilot\animation.mb in Maya.
+[2025-11-14 12:14:18,636][INFO] Maya file already exists. Opening C:\Users\hyung\Desktop\Temp\pilot\animation.mb in Maya.
+[2025-11-14 12:16:16,898][INFO] Maya file not found. Creating a new scene in C:\Users\hyung\Desktop\Temp\monster\animation.mb.
