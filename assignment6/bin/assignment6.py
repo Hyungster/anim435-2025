@@ -72,7 +72,7 @@ else:
     cmds.file(save=True)
     os.system(rf"maya -file {full_path}")
 
-metadata_filepath = os.path.join(asset_path, asset_type + '.json')
+metadata_filepath = os.path.join(asset_type + '.json')
 
 #format and write metadata
 with open(metadata_filepath, 'w') as metadata_file:
